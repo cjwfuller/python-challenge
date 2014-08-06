@@ -4,12 +4,16 @@ import urllib
 # end. 400 times is more than enough.
 
 count = 0
-url = 'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345'
+url = 'http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing='
+nothing = 12345
 
 while count <= 400:
-    sock =  urllib.urlopen(url)
+    sock =  urllib.urlopen(url + str(nothing))
     content = sock.read()
-    # TODO probably keep looping until 400 or some condition
-    print content.rsplit(' ', 1)[0]
+    print content
+    parts = content.rsplit(' ', 1)
+    if(len(parts) < 2):
+        break
+    nothing = parts[1]
     sock.close()
     count = count + 1
